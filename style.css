@@ -1,0 +1,733 @@
+:root {
+    --background: #070711;
+    --surface: #11111d;
+    --primary: #7c3aed;
+    --secondary: #06b6d4;
+    --text: #ffffff;
+    --muted: #a1a1aa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+#loading {
+    position: fixed;
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #19102f 0%,
+            #090714 45%,
+            #050509 100%
+        );
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+#loading.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-content {
+    width: min(400px, 85%);
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Logo */
+
+.logo {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 30px;
+
+    border-radius: 22px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    box-shadow:
+        0 0 30px rgba(124, 58, 237, .5),
+        0 0 80px rgba(6, 182, 212, .15);
+
+    animation: logoFloat 2s ease-in-out infinite;
+}
+
+
+/* Spinner */
+
+.loader {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    border: 3px solid rgba(255,255,255,.1);
+    border-top-color: #a78bfa;
+    border-right-color: #22d3ee;
+
+    animation: spin .9s linear infinite;
+
+    margin-bottom: 25px;
+}
+
+
+/* Text */
+
+.loading-content h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.loading-content p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+/* Progress */
+
+.progress-container {
+    width: 100%;
+    height: 5px;
+
+    background: rgba(255,255,255,.08);
+
+    border-radius: 100px;
+
+    overflow: hidden;
+}
+
+#progress {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    box-shadow:
+        0 0 15px var(--primary);
+
+    transition: width .15s ease;
+}
+
+#percentage {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #71717a;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   SITE
+========================= */
+
+#site {
+    min-height: 100vh;
+
+    opacity: 0;
+    transform: translateY(15px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+#site.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+
+    padding: 25px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255,255,255,.05);
+
+    background: rgba(7,7,17,.6);
+
+    backdrop-filter: blur(20px);
+
+    position: fixed;
+    top: 0;
+
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: white;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.brand span {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    color: #a1a1aa;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: .3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.menu-button {
+    display: none;
+
+    background: none;
+    border: none;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+
+    padding:
+        160px 7%
+        100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 80px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    left: -200px;
+    top: 20%;
+
+    background: #7c3aed;
+
+    filter: blur(180px);
+
+    opacity: .18;
+
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 650px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(167,139,250,.25);
+
+    border-radius: 100px;
+
+    color: #c4b5fd;
+
+    background: rgba(124,58,237,.08);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 7vw, 90px);
+
+    line-height: .98;
+
+    letter-spacing: -4px;
+
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    background: linear-gradient(
+        90deg,
+        #a78bfa,
+        #22d3ee
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.hero p {
+    max-width: 520px;
+
+    color: #a1a1aa;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 35px;
+}
+
+
+/* Buttons */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    padding: 15px 23px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.primary {
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #0891b2
+    );
+
+    box-shadow:
+        0 10px 30px rgba(124,58,237,.25);
+}
+
+.primary:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(124,58,237,.4);
+}
+
+.secondary {
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    background: rgba(255,255,255,.03);
+}
+
+.secondary:hover {
+    background: rgba(255,255,255,.08);
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.hero-card {
+    width: 430px;
+    min-width: 430px;
+
+    padding: 25px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
+        );
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.4);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transform: rotate(2deg);
+
+    animation: cardFloat 5s ease-in-out infinite;
+}
+
+.card-glow {
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -100px;
+    top: -100px;
+
+    background: #7c3aed;
+
+    filter: blur(80px);
+
+    opacity: .4;
+}
+
+.card-header,
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 2;
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+.status {
+    color: #4ade80;
+
+    font-size: 12px;
+}
+
+.chart {
+    height: 220px;
+
+    display: flex;
+    align-items: end;
+
+    gap: 12px;
+
+    margin: 30px 0;
+
+    position: relative;
+}
+
+.chart::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 43px,
+            rgba(255,255,255,.05) 44px
+        );
+}
+
+.chart div {
+    flex: 1;
+
+    border-radius: 7px 7px 2px 2px;
+
+    background: linear-gradient(
+        to top,
+        #7c3aed,
+        #22d3ee
+    );
+
+    box-shadow:
+        0 0 15px rgba(124,58,237,.15);
+
+    position: relative;
+    z-index: 1;
+}
+
+.card-footer {
+    color: #71717a;
+
+    font-size: 13px;
+}
+
+.card-footer strong {
+    color: #4ade80;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    padding: 100px 7%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    background: #09090f;
+}
+
+.feature {
+    padding: 35px;
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.02);
+
+    transition: .3s;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(124,58,237,.3);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(124,58,237,.12);
+
+    font-size: 20px;
+
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: #71717a;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes cardFloat {
+    0%, 100% {
+        transform: rotate(2deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(2deg) translateY(-12px);
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    nav {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .hero {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding-top: 140px;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 430px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .button {
+        text-align: center;
+    }
+
+    .hero-card {
+        transform: none;
+    }
+
+    .hero-card {
+        animation: none;
+    }
+}
